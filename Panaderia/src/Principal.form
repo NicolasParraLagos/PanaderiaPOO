@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -37,11 +37,11 @@
                                   <Component id="lblStockPastel" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtCodPastel" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="txtNomCliente" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="txtFono" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="txtDireccion" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtNomCliente" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txtFono" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txtDireccion" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="txtCodPastel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
@@ -64,111 +64,126 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cmbBuscarCliente" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane2" min="-2" pref="500" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="cmdNuevoPan" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cmdModificarPan" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cmdEliminarPan" min="-2" pref="84" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblCodPan" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="lblNomPan" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="lblPrecioPan" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="lblStockPan" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="lblStockCritico" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtCodPan" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtNomPan" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtPrecioPan" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtStockPan" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="txtStockCriticoPan" min="-2" pref="200" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="lblPan" alignment="1" min="-2" pref="302" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblBuscarPan" min="-2" pref="60" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="txtBuscarPan" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cmbBuscarPan" min="-2" pref="120" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane1" min="-2" pref="500" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="503" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="cmdNuevoPan" min="-2" pref="84" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cmdModificarPan" min="-2" pref="84" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cmdEliminarPan" min="-2" pref="84" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="chkActivo" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblStockCritico" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtStockCritico" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblCodProducto" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="lblNomProducto" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="lblTipo" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="lblPrecio" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="lblStock" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtCodProducto" max="32767" attributes="0"/>
+                                          <Component id="txtNomProducto" max="32767" attributes="0"/>
+                                          <Component id="txtPrecio" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtStock" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="lblProducto" alignment="1" min="-2" pref="302" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="500" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblBuscarPan" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtBuscarProductos" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cmbBuscarProducto" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblProducto" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblCodPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCodPan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCodProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCodProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblNomProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPrecio" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblStock" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtStock" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="lblPan" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNomPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrecioPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrecioPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblStockPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtStockPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblStockCritico" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtStockCriticoPan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtStockCritico" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="chkActivo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbBuscarPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBuscarPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblBuscarPan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cmdNuevoPan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmdEliminarPan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmdModificarPan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbBuscarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBuscarProductos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblBuscarPan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmdNuevoPan" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -202,7 +217,7 @@
                           <Component id="cmdNuevoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jScrollPane2" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -218,45 +233,45 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblPan">
+    <Component class="javax.swing.JLabel" name="lblProducto">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="PAN"/>
+        <Property name="text" type="java.lang.String" value="PRODUCTO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCodPan">
+    <Component class="javax.swing.JLabel" name="lblCodProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Codigo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblNomPan">
+    <Component class="javax.swing.JLabel" name="lblNomProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStockPan">
+    <Component class="javax.swing.JLabel" name="lblPrecio">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Precio"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStock">
       <Properties>
         <Property name="text" type="java.lang.String" value="Stock"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblStockCritico">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Stock Critico"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="txtCodProducto">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCodPan">
+    <Component class="javax.swing.JTextField" name="txtNomProducto">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNomPan">
+    <Component class="javax.swing.JTextField" name="txtPrecio">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtStockPan">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtStockCriticoPan">
+    <Component class="javax.swing.JTextField" name="txtStock">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -265,7 +280,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lstPan">
+        <Component class="javax.swing.JList" name="lstProducto">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -298,22 +313,23 @@
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBuscarPan">
+    <Component class="javax.swing.JTextField" name="txtBuscarProductos">
     </Component>
     <Component class="javax.swing.JLabel" name="lblBuscarPan">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbBuscarPan">
+    <Component class="javax.swing.JComboBox" name="cmbBuscarProducto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="Codigo"/>
             <StringItem index="1" value="Nombre"/>
-            <StringItem index="2" value="Precio por Kilo"/>
-            <StringItem index="3" value="Stock"/>
-            <StringItem index="4" value="Stock Critico"/>
+            <StringItem index="2" value="Tipo"/>
+            <StringItem index="3" value="Precio"/>
+            <StringItem index="4" value="Stock"/>
+            <StringItem index="5" value="Stock Critico"/>
           </StringArray>
         </Property>
       </Properties>
@@ -321,12 +337,10 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPrecioPan">
+    <Component class="javax.swing.JLabel" name="lblTipo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Precio por Kilo"/>
+        <Property name="text" type="java.lang.String" value="Tipo"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPrecioPan">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -429,6 +443,31 @@
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver Pedidos"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStockCritico">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Stock Critico"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtStockCritico">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Pan"/>
+            <StringItem index="1" value="Pastel"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkActivo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Producto Activo"/>
       </Properties>
     </Component>
   </SubComponents>
