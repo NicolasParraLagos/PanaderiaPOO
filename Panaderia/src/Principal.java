@@ -1,11 +1,61 @@
+import javax.swing.*;
+import java.sql.ResultSet;
+
+
 
 
 public class Principal extends javax.swing.JFrame {
     
     Conexion con;
+    
 
     public Principal() {
         initComponents();
+        llenarLista();
+    }
+    
+    DefaultListModel mod = new DefaultListModel();
+    public void llenarLista(){
+        try{
+            String codigo,nombre,tipo,precio,stock,stockCritico,data;
+            con = new Conexion();
+            ResultSet lista = con.listar("SELECT * FROM productos");
+            
+            lstProducto.setModel(mod);
+            while(lista.next()){
+                codigo = lista.getString("codigo");
+                while(codigo.length()<9){
+                    codigo = codigo + " ";
+                }
+                nombre = "#" + lista.getString("nombre");
+                while(nombre.length()<52){
+                    nombre = nombre + " ";
+                }
+                tipo = "/" + lista.getString("tipo");
+                while(tipo.length()<22){
+                    tipo = tipo + " ";
+                }
+                precio = "$" + lista.getString("precio");
+                while(precio.length()<13){
+                    precio = precio + " ";
+                }
+                stock = "%" + lista.getString("stock");
+                while(stock.length()<7){
+                    stock = stock + " ";
+                }
+                stockCritico = "!" + lista.getString("stockCritico");
+                while(stockCritico.length()<7){
+                    stockCritico = stockCritico + " ";
+                }
+                data=codigo + nombre + tipo + precio + stock + stockCritico;
+                mod.addElement(data);
+            }
+        
+            con.close();
+            
+        }catch(Exception ex){
+            System.out.println("Pos fallo");
+        }
     }
 
 
@@ -73,11 +123,6 @@ public class Principal extends javax.swing.JFrame {
         lblStock.setText("Stock");
 
         lstProducto.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        lstProducto.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1234  #Baguette          /Pan     $900    %20  !5", "4312  #Torta de merenge  /Pastel  $10000  %10  !3" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstProducto.setToolTipText("");
         lstProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -208,9 +253,9 @@ public class Principal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(rbCancelado))
                                     .addComponent(cmdEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,10 +295,10 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 161, Short.MAX_VALUE)
                                 .addComponent(lblBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmbBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))))
