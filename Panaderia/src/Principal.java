@@ -11,12 +11,16 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-        llenarLista();
+        llenarListaProducto();
+        llenarListaPedidos();
     }
     
-    DefaultListModel mod = new DefaultListModel();
-    public void llenarLista(){
+
+    public void llenarListaProducto(){
         try{
+            DefaultListModel mod = new DefaultListModel();
+            mod.clear();
+            
             String codigo,nombre,tipo,precio,stock,stockCritico,data;
             con = new Conexion();
             ResultSet lista = con.listar("SELECT * FROM productos");
@@ -47,17 +51,52 @@ public class Principal extends javax.swing.JFrame {
                 while(stockCritico.length()<7){
                     stockCritico = stockCritico + " ";
                 }
-                data=codigo + nombre + tipo + precio + stock + stockCritico;
+                
+                data = codigo + nombre + tipo + precio + stock + stockCritico;
                 mod.addElement(data);
             }
         
             con.close();
             
         }catch(Exception ex){
-            System.out.println("Pos fallo");
+            
         }
     }
 
+    public void llenarListaPedidos(){
+        try{
+            DefaultListModel mod = new DefaultListModel();
+            mod.clear();
+            
+            String numero,rutCliente,estado,data;
+            con = new Conexion();
+            ResultSet lista = con.listar("SELECT * FROM pedidos");
+            
+            lstPedido.setModel(mod);
+            while(lista.next()){
+                numero = lista.getString("numero");
+                while(numero.length()<11){
+                    numero = numero + " ";
+                }
+                rutCliente = "#" + lista.getString("rutCliente");
+                while(rutCliente.length()<16){
+                    rutCliente = rutCliente + " ";
+                }
+                estado = "!" + lista.getString("estado");
+                while(estado.length()<16){
+                    estado = estado + " ";
+                }
+                
+                data = numero + rutCliente + estado;
+                mod.addElement(data);
+            }
+            
+            con.close();
+            
+        }catch(Exception ex){
+            
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -149,11 +188,6 @@ public class Principal extends javax.swing.JFrame {
         lblTipo.setText("Tipo");
 
         lstPedido.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        lstPedido.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "4321  #20.174.520-9  !Pendiente", "3333  #12.520.312-4  !Listo" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstPedidoMouseClicked(evt);
@@ -433,6 +467,19 @@ public class Principal extends javax.swing.JFrame {
         if(info.substring(info.indexOf("!") + 1,info.length()).trim().equals("Cancelado")){
             rbCancelado.setSelected(rootPaneCheckingEnabled);
         }
+        
+        con = new Conexion();
+        
+        String SQL = "SELECT descripcion FROM pedidos WHERE numero="+txtNum.getText();
+        try{
+            ResultSet des = con.listar(SQL);
+            des.next();
+            txtDescripcion.setText(des.getString("descripcion"));
+        }catch(Exception ex){
+            
+        }
+
+        con.close();
     }//GEN-LAST:event_lstPedidoMouseClicked
 
     private void cmdNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoProductoActionPerformed
@@ -456,6 +503,8 @@ public class Principal extends javax.swing.JFrame {
         txtPrecio.setText(null);
         txtStock.setText(null);
         txtStockCritico.setText(null);
+        
+        llenarListaProducto();
     }//GEN-LAST:event_cmdNuevoProductoActionPerformed
 
     private void cmdNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoPedidoActionPerformed
@@ -484,8 +533,8 @@ public class Principal extends javax.swing.JFrame {
         txtRutCliente.setText(null);
         txtDescripcion.setText(null);
         rbPendiente.setSelected(rootPaneCheckingEnabled);
-
         
+        llenarListaPedidos();
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
 
     /**

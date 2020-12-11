@@ -45,7 +45,6 @@ public class Conexion {
             return lista;
         }catch(Exception ex){
             msg="Ha ocurrido un error, operacion cancelada";
-            System.out.println("Pos fallo conexion");
             return null;
         }
     }
