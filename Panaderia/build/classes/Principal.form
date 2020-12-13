@@ -326,6 +326,9 @@
         <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdModificarProductoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarProducto">
       <Properties>
@@ -333,6 +336,9 @@
         <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdEliminarProductoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarProducto">
     </Component>
@@ -428,6 +434,9 @@
         <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdModificarPedidoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarPedido">
       <Properties>
@@ -435,6 +444,9 @@
         <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdEliminarPedidoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBuscarPedido">
       <Properties>
