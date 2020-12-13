@@ -147,9 +147,6 @@ public class Principal extends javax.swing.JFrame {
         cmdClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1143, 701));
-        setMinimumSize(new java.awt.Dimension(1143, 701));
-        setResizable(false);
 
         lblProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProducto.setText("PRODUCTO");
@@ -257,11 +254,6 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdClientes.setText("Ver Clientes");
-        cmdClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdClientesActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -580,12 +572,6 @@ public class Principal extends javax.swing.JFrame {
         txtDescripcion.setText(null);
         rbPendiente.setSelected(rootPaneCheckingEnabled);  
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
-
-    private void cmdClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClientesActionPerformed
-        setVisible(false);
-        Clientes form = new Clientes();
-        form.setVisible(true);
-    }//GEN-LAST:event_cmdClientesActionPerformed
 
     /**
      * @param args the command line arguments
