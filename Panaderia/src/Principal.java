@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.sql.ResultSet;
 
 
-
-
 public class Principal extends javax.swing.JFrame {
     
     Conexion con;
@@ -170,7 +168,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstProducto);
 
-        cmdNuevoProducto.setText("Nuevo");
+        cmdNuevoProducto.setText("Insertar");
+        cmdNuevoProducto.setToolTipText("Insertar en la base de datos");
         cmdNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNuevoProductoActionPerformed(evt);
@@ -178,8 +177,12 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdModificarProducto.setText("Modificar");
+        cmdModificarProducto.setToolTipText("Seleccione el item de la lista que quiera modificar");
+        cmdModificarProducto.setEnabled(false);
 
         cmdEliminarProducto.setText("Eliminar");
+        cmdEliminarProducto.setToolTipText("Seleccione el item de la lista que quiera eliminar");
+        cmdEliminarProducto.setEnabled(false);
 
         lblBuscarProducto.setText("Buscar");
 
@@ -204,7 +207,8 @@ public class Principal extends javax.swing.JFrame {
 
         lblDescripcion.setText("Descipción");
 
-        cmdNuevoPedido.setText("Nuevo");
+        cmdNuevoPedido.setText("Insertar");
+        cmdNuevoPedido.setToolTipText("Insertar en la base de datos");
         cmdNuevoPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNuevoPedidoActionPerformed(evt);
@@ -212,8 +216,12 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdModificarPedido.setText("Modificar");
+        cmdModificarPedido.setToolTipText("Seleccione el item de la lista que quiera modificar");
+        cmdModificarPedido.setEnabled(false);
 
         cmdEliminarPedido.setText("Eliminar");
+        cmdEliminarPedido.setToolTipText("Seleccione el item de la lista que quiera eliminar");
+        cmdEliminarPedido.setEnabled(false);
 
         lblBuscarPedido.setText("Buscar");
 
@@ -434,6 +442,12 @@ public class Principal extends javax.swing.JFrame {
         Boolean continuar = true;
         int c;
         
+        cmdModificarProducto.setEnabled(true);
+        cmdEliminarProducto.setEnabled(true);
+        txtCodProducto.setEnabled(false);
+        cmdNuevoProducto.setText("Nuevo");
+        cmdNuevoProducto.setToolTipText("Habilitar Insercion");
+        
         info = String.valueOf(lstProducto.getSelectedValue());
         txtCodProducto.setText(info.substring(0,info.indexOf("#")).trim());
         txtNomProducto.setText(info.substring(info.indexOf("#") + 1,info.indexOf("/")).trim());
@@ -453,6 +467,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void lstPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPedidoMouseClicked
         String info;
+        
+        cmdModificarPedido.setEnabled(true);
+        cmdEliminarPedido.setEnabled(true);
+        txtNum.setEnabled(false);
+        cmdNuevoPedido.setText("Nuevo");
+        cmdNuevoPedido.setToolTipText("Habilitar Insercion");
         
         info = String.valueOf(lstPedido.getSelectedValue());
         txtNum.setText(info.substring(0,info.indexOf("#")).trim());
@@ -483,19 +503,29 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPedidoMouseClicked
 
     private void cmdNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoProductoActionPerformed
-        String cod = txtCodProducto.getText();
-        String nom = txtNomProducto.getText();
-        String tipo = String.valueOf(cmbTipo.getSelectedItem());
-        int precio = Integer.parseInt(txtPrecio.getText());
-        int stock = Integer.parseInt(txtStock.getText());
-        int stockCritico = Integer.parseInt(txtStockCritico.getText());
-        
-        con = new Conexion();
-        
-        String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
-        
-        con.query(SQL);
-        con.close();
+        if((cmdNuevoProducto.getText()).equals("Insertar")){
+            String cod = txtCodProducto.getText();
+            String nom = txtNomProducto.getText();
+            String tipo = String.valueOf(cmbTipo.getSelectedItem());
+            int precio = Integer.parseInt(txtPrecio.getText());
+            int stock = Integer.parseInt(txtStock.getText());
+            int stockCritico = Integer.parseInt(txtStockCritico.getText());
+
+            con = new Conexion();
+
+            String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
+
+            con.query(SQL);
+            con.close();
+
+            llenarListaProducto();
+        }else{
+            txtCodProducto.setEnabled(true);
+            cmdModificarProducto.setEnabled(false);
+            cmdEliminarProducto.setEnabled(false);
+            cmdNuevoProducto.setText("Insertar");
+            cmdNuevoProducto.setToolTipText("Insertar en la base de datos");
+        }
         
         txtCodProducto.setText(null);
         txtNomProducto.setText(null);
@@ -503,38 +533,44 @@ public class Principal extends javax.swing.JFrame {
         txtPrecio.setText(null);
         txtStock.setText(null);
         txtStockCritico.setText(null);
-        
-        llenarListaProducto();
     }//GEN-LAST:event_cmdNuevoProductoActionPerformed
 
     private void cmdNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoPedidoActionPerformed
-        String num = txtNum.getText();
-        String rut = txtRutCliente.getText();
-        String des = txtDescripcion.getText();
-        String est;
-        if(rbPendiente.isSelected()){
-            est="Pendiente";
-        }else{
-            if(rbListo.isSelected()){
-                est="Listo";
+        if((cmdNuevoPedido.getText()).equals("Insertar")){
+            String num = txtNum.getText();
+            String rut = txtRutCliente.getText();
+            String des = txtDescripcion.getText();
+            String est;
+            if(rbPendiente.isSelected()){
+                est="Pendiente";
             }else{
-                est="Cancelado";
+                if(rbListo.isSelected()){
+                    est="Listo";
+                }else{
+                    est="Cancelado";
+                }
             }
+
+            con = new Conexion();
+
+            String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
+
+            con.query(SQL);
+            con.close();
+            
+            llenarListaPedidos();
+        }else{
+            txtNum.setEnabled(true);
+            cmdModificarPedido.setEnabled(false);
+            cmdEliminarPedido.setEnabled(false);
+            cmdNuevoPedido.setText("Insertar");
+            cmdNuevoPedido.setToolTipText("Insertar en la base de datos");
         }
-        
-        con = new Conexion();
-        
-        String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
-        
-        con.query(SQL);
-        con.close();
         
         txtNum.setText(null);
         txtRutCliente.setText(null);
         txtDescripcion.setText(null);
-        rbPendiente.setSelected(rootPaneCheckingEnabled);
-        
-        llenarListaPedidos();
+        rbPendiente.setSelected(rootPaneCheckingEnabled);  
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
 
     /**

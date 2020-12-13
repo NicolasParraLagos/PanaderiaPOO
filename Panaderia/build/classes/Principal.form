@@ -313,7 +313,8 @@
     </Container>
     <Component class="javax.swing.JButton" name="cmdNuevoProducto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nuevo"/>
+        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insertar en la base de datos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdNuevoProductoActionPerformed"/>
@@ -322,11 +323,15 @@
     <Component class="javax.swing.JButton" name="cmdModificarProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarProducto">
@@ -410,7 +415,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdNuevoPedido">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nuevo"/>
+        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insertar en la base de datos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdNuevoPedidoActionPerformed"/>
@@ -419,11 +425,15 @@
     <Component class="javax.swing.JButton" name="cmdModificarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBuscarPedido">
