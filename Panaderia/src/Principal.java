@@ -9,19 +9,19 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-        llenarListaProducto();
-        llenarListaPedidos();
+        llenarListaProducto("SELECT * FROM productos");
+        llenarListaPedidos("SELECT * FROM pedidos");
     }
     
 
-    public void llenarListaProducto(){
+    public void llenarListaProducto(String SQL){
         try{
             DefaultListModel mod = new DefaultListModel();
             mod.clear();
             
             String codigo,nombre,tipo,precio,stock,stockCritico,data;
             con = new Conexion();
-            ResultSet lista = con.listar("SELECT * FROM productos");
+            ResultSet lista = con.listar(SQL);
             
             lstProducto.setModel(mod);
             while(lista.next()){
@@ -61,14 +61,14 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    public void llenarListaPedidos(){
+    public void llenarListaPedidos(String SQL){
         try{
             DefaultListModel mod = new DefaultListModel();
             mod.clear();
             
             String numero,rutCliente,estado,data;
             con = new Conexion();
-            ResultSet lista = con.listar("SELECT * FROM pedidos");
+            ResultSet lista = con.listar(SQL);
             
             lstPedido.setModel(mod);
             while(lista.next()){
@@ -210,6 +210,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        txtBuscarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarProductoKeyReleased(evt);
+            }
+        });
+
         lblBuscarProducto.setText("Buscar");
 
         cmbBuscarProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre", "Tipo", "Precio", "Stock", "Stock Critico" }));
@@ -261,7 +267,13 @@ public class Principal extends javax.swing.JFrame {
 
         lblBuscarPedido.setText("Buscar");
 
-        cmbBuscarPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Numero", "Rut" }));
+        txtBuscarPedido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarPedidoKeyReleased(evt);
+            }
+        });
+
+        cmbBuscarPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Numero", "Rut", "Estado" }));
 
         lblStockCritico.setText("Stock Critico");
 
@@ -527,6 +539,7 @@ public class Principal extends javax.swing.JFrame {
         con = new Conexion();
         
         String SQL = "SELECT descripcion FROM pedidos WHERE numero="+txtNum.getText();
+        
         try{
             ResultSet des = con.listar(SQL);
             des.next();
@@ -554,7 +567,7 @@ public class Principal extends javax.swing.JFrame {
             con.query(SQL);
             con.close();
 
-            llenarListaProducto();
+            llenarListaProducto("SELECT * FROM productos");
         }else{
             txtCodProducto.setEnabled(true);
             cmdModificarProducto.setEnabled(false);
@@ -589,7 +602,7 @@ public class Principal extends javax.swing.JFrame {
             con.query(SQL);
             con.close();
             
-            llenarListaPedidos();
+            llenarListaPedidos("SELECT * FROM pedidos");
         }else{
             txtNum.setEnabled(true);
             cmdModificarPedido.setEnabled(false);
@@ -617,7 +630,7 @@ public class Principal extends javax.swing.JFrame {
         con.query(SQL);
         con.close();
         
-        llenarListaProducto();  
+        llenarListaProducto("SELECT * FROM productos");  
         vaciarProducto();
     }//GEN-LAST:event_cmdModificarProductoActionPerformed
 
@@ -645,7 +658,7 @@ public class Principal extends javax.swing.JFrame {
         con.query(SQL);
         con.close();
         
-        llenarListaPedidos();
+        llenarListaPedidos("SELECT * FROM pedidos");
         vaciarPedido();
     }//GEN-LAST:event_cmdModificarPedidoActionPerformed
 
@@ -656,7 +669,7 @@ public class Principal extends javax.swing.JFrame {
         con.query("DELETE FROM productos WHERE codigo = '" + codigo + "'");
         con.close();
         
-        llenarListaProducto();
+        llenarListaProducto("SELECT * FROM productos");
         vaciarProducto();
     }//GEN-LAST:event_cmdEliminarProductoActionPerformed
 
@@ -667,9 +680,52 @@ public class Principal extends javax.swing.JFrame {
         con.query("DELETE FROM pedidos WHERE numero = " + num);
         con.close();
         
-        llenarListaPedidos();
+        llenarListaPedidos("SELECT * FROM pedidos");
         vaciarPedido();
     }//GEN-LAST:event_cmdEliminarPedidoActionPerformed
+
+    private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
+        String buscar, columna, SQL;
+        
+        buscar = txtBuscarProducto.getText();
+
+        if(String.valueOf(cmbBuscarProducto.getSelectedItem()).equals("Stock Critico")){
+            columna = "stockCritico";
+        }else{
+            columna = String.valueOf(cmbBuscarProducto.getSelectedItem()).toLowerCase();
+        }
+        
+        con = new Conexion();
+        
+        if(columna.equals("precio") || columna.equals("stock") || columna.equals("stockCritico")){
+            SQL = "SELECT * FROM productos WHERE " + columna + " = " + buscar;
+        }else{
+            SQL = "SELECT * FROM productos WHERE " + columna + " LIKE '%" + buscar + "%'";
+        }
+        
+        llenarListaProducto(SQL);
+    }//GEN-LAST:event_txtBuscarProductoKeyReleased
+
+    private void txtBuscarPedidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPedidoKeyReleased
+        String buscar, columna, SQL;
+        
+        buscar = txtBuscarPedido.getText();
+        columna = String.valueOf(cmbBuscarPedido.getSelectedItem()).toLowerCase();
+        
+        if(columna.equals("rut")){
+            columna = "rutCliente";
+        }
+        
+        con = new Conexion();
+        
+        if(columna.equals("numero")){
+            SQL = "SELECT * FROM pedidos WHERE " + columna + " = " + buscar;
+        }else{
+            SQL = "SELECT * FROM pedidos WHERE " + columna + " LIKE '%" + buscar + "%'";
+        }
+        
+        llenarListaPedidos(SQL);
+    }//GEN-LAST:event_txtBuscarPedidoKeyReleased
 
     /**
      * @param args the command line arguments

@@ -341,6 +341,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarProducto">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarProductoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBuscarProducto">
       <Properties>
@@ -454,13 +457,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarPedido">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarPedidoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbBuscarPedido">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="3">
             <StringItem index="0" value="Numero"/>
             <StringItem index="1" value="Rut"/>
+            <StringItem index="2" value="Estado"/>
           </StringArray>
         </Property>
       </Properties>
