@@ -95,6 +95,22 @@ public class Principal extends javax.swing.JFrame {
             
         }
     }
+    
+    public void vaciarProducto(){
+        txtCodProducto.setText(null);
+        txtNomProducto.setText(null);
+        cmbTipo.setSelectedIndex(0);
+        txtPrecio.setText(null);
+        txtStock.setText(null);
+        txtStockCritico.setText(null);
+    }
+    
+    public void vaciarPedido(){
+        txtNum.setText(null);
+        txtRutCliente.setText(null);
+        txtDescripcion.setText(null);
+        rbPendiente.setSelected(rootPaneCheckingEnabled);  
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -179,10 +195,20 @@ public class Principal extends javax.swing.JFrame {
         cmdModificarProducto.setText("Modificar");
         cmdModificarProducto.setToolTipText("Seleccione el item de la lista que quiera modificar");
         cmdModificarProducto.setEnabled(false);
+        cmdModificarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarProductoActionPerformed(evt);
+            }
+        });
 
         cmdEliminarProducto.setText("Eliminar");
         cmdEliminarProducto.setToolTipText("Seleccione el item de la lista que quiera eliminar");
         cmdEliminarProducto.setEnabled(false);
+        cmdEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarProductoActionPerformed(evt);
+            }
+        });
 
         lblBuscarProducto.setText("Buscar");
 
@@ -218,10 +244,20 @@ public class Principal extends javax.swing.JFrame {
         cmdModificarPedido.setText("Modificar");
         cmdModificarPedido.setToolTipText("Seleccione el item de la lista que quiera modificar");
         cmdModificarPedido.setEnabled(false);
+        cmdModificarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarPedidoActionPerformed(evt);
+            }
+        });
 
         cmdEliminarPedido.setText("Eliminar");
         cmdEliminarPedido.setToolTipText("Seleccione el item de la lista que quiera eliminar");
         cmdEliminarPedido.setEnabled(false);
+        cmdEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarPedidoActionPerformed(evt);
+            }
+        });
 
         lblBuscarPedido.setText("Buscar");
 
@@ -527,12 +563,7 @@ public class Principal extends javax.swing.JFrame {
             cmdNuevoProducto.setToolTipText("Insertar en la base de datos");
         }
         
-        txtCodProducto.setText(null);
-        txtNomProducto.setText(null);
-        cmbTipo.setSelectedIndex(0);
-        txtPrecio.setText(null);
-        txtStock.setText(null);
-        txtStockCritico.setText(null);
+        vaciarProducto();
     }//GEN-LAST:event_cmdNuevoProductoActionPerformed
 
     private void cmdNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoPedidoActionPerformed
@@ -567,11 +598,78 @@ public class Principal extends javax.swing.JFrame {
             cmdNuevoPedido.setToolTipText("Insertar en la base de datos");
         }
         
-        txtNum.setText(null);
-        txtRutCliente.setText(null);
-        txtDescripcion.setText(null);
-        rbPendiente.setSelected(rootPaneCheckingEnabled);  
+        vaciarPedido();
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
+
+    private void cmdModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarProductoActionPerformed
+        String codigo, nombre, tipo, precio, stock, stockCritico;
+        codigo = txtCodProducto.getText();
+        nombre = txtNomProducto.getText();
+        tipo = String.valueOf(cmbTipo.getSelectedItem());
+        precio = txtPrecio.getText();
+        stock = txtStock.getText();
+        stockCritico = txtStockCritico.getText();
+        
+        con = new Conexion();
+               
+        String SQL = "UPDATE productos SET nombre = '" + nombre + "', tipo = '" + tipo + "', precio = " + precio + ", stock = " + stock + ", stockCritico = " + stockCritico + " WHERE codigo = '" + codigo + "'";
+        
+        con.query(SQL);
+        con.close();
+        
+        llenarListaProducto();  
+        vaciarProducto();
+    }//GEN-LAST:event_cmdModificarProductoActionPerformed
+
+    private void cmdModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarPedidoActionPerformed
+        String num, rut, des, est;
+        
+        num = txtNum.getText();
+        rut = txtRutCliente.getText();
+        des = txtDescripcion.getText();
+        
+        if(rbPendiente.isSelected()){
+            est="Pendiente";
+        }else{
+            if(rbListo.isSelected()){
+                est="Listo";
+            }else{
+                est="Cancelado";
+            }
+        }
+        
+        con = new Conexion();
+        
+        String SQL = "UPDATE pedidos SET rutCliente = '" + rut + "', descripcion = '" + des + "', estado = '" + est + "' WHERE numero = " + num;
+        
+        con.query(SQL);
+        con.close();
+        
+        llenarListaPedidos();
+        vaciarPedido();
+    }//GEN-LAST:event_cmdModificarPedidoActionPerformed
+
+    private void cmdEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarProductoActionPerformed
+        String codigo = txtCodProducto.getText();;
+        
+        con = new Conexion();   
+        con.query("DELETE FROM productos WHERE codigo = '" + codigo + "'");
+        con.close();
+        
+        llenarListaProducto();
+        vaciarProducto();
+    }//GEN-LAST:event_cmdEliminarProductoActionPerformed
+
+    private void cmdEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarPedidoActionPerformed
+        String num = txtNum.getText();
+        
+        con = new Conexion();
+        con.query("DELETE FROM pedidos WHERE numero = " + num);
+        con.close();
+        
+        llenarListaPedidos();
+        vaciarPedido();
+    }//GEN-LAST:event_cmdEliminarPedidoActionPerformed
 
     /**
      * @param args the command line arguments
