@@ -37,6 +37,17 @@ public class Conexion {
             msg="Ha ocurrido un error, operacion cancelada";
         }
     }
+    
+    public ResultSet listar(String SQL){
+        try{
+            ResultSet lista = st.executeQuery(SQL);
+            msg="operacion realizada correctamente";
+            return lista;
+        }catch(Exception ex){
+            msg="Ha ocurrido un error, operacion cancelada";
+            return null;
+        }
+    }
         
     public boolean close(){
         try{

@@ -1,13 +1,100 @@
+import javax.swing.*;
+import java.sql.ResultSet;
 
 
 public class Principal extends javax.swing.JFrame {
     
     Conexion con;
+    
 
     public Principal() {
         initComponents();
+        llenarListaProducto();
+        llenarListaPedidos();
+    }
+    
+
+    public void llenarListaProducto(){
+        try{
+            DefaultListModel mod = new DefaultListModel();
+            mod.clear();
+            
+            String codigo,nombre,tipo,precio,stock,stockCritico,data;
+            con = new Conexion();
+            ResultSet lista = con.listar("SELECT * FROM productos");
+            
+            lstProducto.setModel(mod);
+            while(lista.next()){
+                codigo = lista.getString("codigo");
+                while(codigo.length()<9){
+                    codigo = codigo + " ";
+                }
+                nombre = "#" + lista.getString("nombre");
+                while(nombre.length()<52){
+                    nombre = nombre + " ";
+                }
+                tipo = "/" + lista.getString("tipo");
+                while(tipo.length()<22){
+                    tipo = tipo + " ";
+                }
+                precio = "$" + lista.getString("precio");
+                while(precio.length()<13){
+                    precio = precio + " ";
+                }
+                stock = "%" + lista.getString("stock");
+                while(stock.length()<7){
+                    stock = stock + " ";
+                }
+                stockCritico = "!" + lista.getString("stockCritico");
+                while(stockCritico.length()<7){
+                    stockCritico = stockCritico + " ";
+                }
+                
+                data = codigo + nombre + tipo + precio + stock + stockCritico;
+                mod.addElement(data);
+            }
+        
+            con.close();
+            
+        }catch(Exception ex){
+            
+        }
     }
 
+    public void llenarListaPedidos(){
+        try{
+            DefaultListModel mod = new DefaultListModel();
+            mod.clear();
+            
+            String numero,rutCliente,estado,data;
+            con = new Conexion();
+            ResultSet lista = con.listar("SELECT * FROM pedidos");
+            
+            lstPedido.setModel(mod);
+            while(lista.next()){
+                numero = lista.getString("numero");
+                while(numero.length()<11){
+                    numero = numero + " ";
+                }
+                rutCliente = "#" + lista.getString("rutCliente");
+                while(rutCliente.length()<16){
+                    rutCliente = rutCliente + " ";
+                }
+                estado = "!" + lista.getString("estado");
+                while(estado.length()<16){
+                    estado = estado + " ";
+                }
+                
+                data = numero + rutCliente + estado;
+                mod.addElement(data);
+            }
+            
+            con.close();
+            
+        }catch(Exception ex){
+            
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -73,11 +160,6 @@ public class Principal extends javax.swing.JFrame {
         lblStock.setText("Stock");
 
         lstProducto.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        lstProducto.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1234  #Baguette          /Pan     $900    %20  !5", "4312  #Torta de merenge  /Pastel  $10000  %10  !3" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstProducto.setToolTipText("");
         lstProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -86,7 +168,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstProducto);
 
-        cmdNuevoProducto.setText("Nuevo");
+        cmdNuevoProducto.setText("Insertar");
+        cmdNuevoProducto.setToolTipText("Insertar en la base de datos");
         cmdNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNuevoProductoActionPerformed(evt);
@@ -94,8 +177,12 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdModificarProducto.setText("Modificar");
+        cmdModificarProducto.setToolTipText("Seleccione el item de la lista que quiera modificar");
+        cmdModificarProducto.setEnabled(false);
 
         cmdEliminarProducto.setText("Eliminar");
+        cmdEliminarProducto.setToolTipText("Seleccione el item de la lista que quiera eliminar");
+        cmdEliminarProducto.setEnabled(false);
 
         lblBuscarProducto.setText("Buscar");
 
@@ -104,11 +191,6 @@ public class Principal extends javax.swing.JFrame {
         lblTipo.setText("Tipo");
 
         lstPedido.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
-        lstPedido.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "4321  #20.174.520-9  !Pendiente", "3333  #12.520.312-4  !Listo" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         lstPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstPedidoMouseClicked(evt);
@@ -125,7 +207,8 @@ public class Principal extends javax.swing.JFrame {
 
         lblDescripcion.setText("Descipción");
 
-        cmdNuevoPedido.setText("Nuevo");
+        cmdNuevoPedido.setText("Insertar");
+        cmdNuevoPedido.setToolTipText("Insertar en la base de datos");
         cmdNuevoPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNuevoPedidoActionPerformed(evt);
@@ -133,8 +216,12 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdModificarPedido.setText("Modificar");
+        cmdModificarPedido.setToolTipText("Seleccione el item de la lista que quiera modificar");
+        cmdModificarPedido.setEnabled(false);
 
         cmdEliminarPedido.setText("Eliminar");
+        cmdEliminarPedido.setToolTipText("Seleccione el item de la lista que quiera eliminar");
+        cmdEliminarPedido.setEnabled(false);
 
         lblBuscarPedido.setText("Buscar");
 
@@ -208,9 +295,9 @@ public class Principal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(rbCancelado))
                                     .addComponent(cmdEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,10 +337,10 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 161, Short.MAX_VALUE)
                                 .addComponent(lblBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmbBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))))
@@ -355,6 +442,12 @@ public class Principal extends javax.swing.JFrame {
         Boolean continuar = true;
         int c;
         
+        cmdModificarProducto.setEnabled(true);
+        cmdEliminarProducto.setEnabled(true);
+        txtCodProducto.setEnabled(false);
+        cmdNuevoProducto.setText("Nuevo");
+        cmdNuevoProducto.setToolTipText("Habilitar Insercion");
+        
         info = String.valueOf(lstProducto.getSelectedValue());
         txtCodProducto.setText(info.substring(0,info.indexOf("#")).trim());
         txtNomProducto.setText(info.substring(info.indexOf("#") + 1,info.indexOf("/")).trim());
@@ -375,6 +468,12 @@ public class Principal extends javax.swing.JFrame {
     private void lstPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPedidoMouseClicked
         String info;
         
+        cmdModificarPedido.setEnabled(true);
+        cmdEliminarPedido.setEnabled(true);
+        txtNum.setEnabled(false);
+        cmdNuevoPedido.setText("Nuevo");
+        cmdNuevoPedido.setToolTipText("Habilitar Insercion");
+        
         info = String.valueOf(lstPedido.getSelectedValue());
         txtNum.setText(info.substring(0,info.indexOf("#")).trim());
         txtRutCliente.setText(info.substring(info.indexOf("#") + 1,info.indexOf("!")).trim());
@@ -388,22 +487,45 @@ public class Principal extends javax.swing.JFrame {
         if(info.substring(info.indexOf("!") + 1,info.length()).trim().equals("Cancelado")){
             rbCancelado.setSelected(rootPaneCheckingEnabled);
         }
-    }//GEN-LAST:event_lstPedidoMouseClicked
-
-    private void cmdNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoProductoActionPerformed
-        String cod = txtCodProducto.getText();
-        String nom = txtNomProducto.getText();
-        String tipo = String.valueOf(cmbTipo.getSelectedItem());
-        int precio = Integer.parseInt(txtPrecio.getText());
-        int stock = Integer.parseInt(txtStock.getText());
-        int stockCritico = Integer.parseInt(txtStockCritico.getText());
         
         con = new Conexion();
         
-        String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
-        
-        con.query(SQL);
+        String SQL = "SELECT descripcion FROM pedidos WHERE numero="+txtNum.getText();
+        try{
+            ResultSet des = con.listar(SQL);
+            des.next();
+            txtDescripcion.setText(des.getString("descripcion"));
+        }catch(Exception ex){
+            
+        }
+
         con.close();
+    }//GEN-LAST:event_lstPedidoMouseClicked
+
+    private void cmdNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoProductoActionPerformed
+        if((cmdNuevoProducto.getText()).equals("Insertar")){
+            String cod = txtCodProducto.getText();
+            String nom = txtNomProducto.getText();
+            String tipo = String.valueOf(cmbTipo.getSelectedItem());
+            int precio = Integer.parseInt(txtPrecio.getText());
+            int stock = Integer.parseInt(txtStock.getText());
+            int stockCritico = Integer.parseInt(txtStockCritico.getText());
+
+            con = new Conexion();
+
+            String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
+
+            con.query(SQL);
+            con.close();
+
+            llenarListaProducto();
+        }else{
+            txtCodProducto.setEnabled(true);
+            cmdModificarProducto.setEnabled(false);
+            cmdEliminarProducto.setEnabled(false);
+            cmdNuevoProducto.setText("Insertar");
+            cmdNuevoProducto.setToolTipText("Insertar en la base de datos");
+        }
         
         txtCodProducto.setText(null);
         txtNomProducto.setText(null);
@@ -414,33 +536,41 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdNuevoProductoActionPerformed
 
     private void cmdNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoPedidoActionPerformed
-        String num = txtNum.getText();
-        String rut = txtRutCliente.getText();
-        String des = txtDescripcion.getText();
-        String est;
-        if(rbPendiente.isSelected()){
-            est="Pendiente";
-        }else{
-            if(rbListo.isSelected()){
-                est="Listo";
+        if((cmdNuevoPedido.getText()).equals("Insertar")){
+            String num = txtNum.getText();
+            String rut = txtRutCliente.getText();
+            String des = txtDescripcion.getText();
+            String est;
+            if(rbPendiente.isSelected()){
+                est="Pendiente";
             }else{
-                est="Cancelado";
+                if(rbListo.isSelected()){
+                    est="Listo";
+                }else{
+                    est="Cancelado";
+                }
             }
+
+            con = new Conexion();
+
+            String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
+
+            con.query(SQL);
+            con.close();
+            
+            llenarListaPedidos();
+        }else{
+            txtNum.setEnabled(true);
+            cmdModificarPedido.setEnabled(false);
+            cmdEliminarPedido.setEnabled(false);
+            cmdNuevoPedido.setText("Insertar");
+            cmdNuevoPedido.setToolTipText("Insertar en la base de datos");
         }
-        
-        con = new Conexion();
-        
-        String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
-        
-        con.query(SQL);
-        con.close();
         
         txtNum.setText(null);
         txtRutCliente.setText(null);
         txtDescripcion.setText(null);
-        rbPendiente.setSelected(rootPaneCheckingEnabled);
-
-        
+        rbPendiente.setSelected(rootPaneCheckingEnabled);  
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
 
     /**

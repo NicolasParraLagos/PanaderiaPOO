@@ -74,9 +74,9 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="422" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="531" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="cmdSalir" min="-2" pref="84" max="-2" attributes="0"/>
@@ -125,11 +125,11 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="161" max="32767" attributes="0"/>
                               <Component id="lblBuscarProducto" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtBuscarProducto" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="txtBuscarProducto" min="-2" pref="410" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="cmbBuscarProducto" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
@@ -298,10 +298,7 @@
               <Font name="Consolas" size="13" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="1234  #Baguette          /Pan     $900    %20  !5"/>
-                <StringItem index="1" value="4312  #Torta de merenge  /Pastel  $10000  %10  !3"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
@@ -316,7 +313,8 @@
     </Container>
     <Component class="javax.swing.JButton" name="cmdNuevoProducto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nuevo"/>
+        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insertar en la base de datos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdNuevoProductoActionPerformed"/>
@@ -325,11 +323,15 @@
     <Component class="javax.swing.JButton" name="cmdModificarProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarProducto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarProducto">
@@ -374,10 +376,7 @@
               <Font name="Consolas" size="13" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="4321  #20.174.520-9  !Pendiente"/>
-                <StringItem index="1" value="3333  #12.520.312-4  !Listo"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
@@ -416,7 +415,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdNuevoPedido">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nuevo"/>
+        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insertar en la base de datos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdNuevoPedidoActionPerformed"/>
@@ -425,11 +425,15 @@
     <Component class="javax.swing.JButton" name="cmdModificarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cmdEliminarPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione el item de la lista que quiera eliminar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBuscarPedido">
