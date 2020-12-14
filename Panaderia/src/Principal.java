@@ -302,6 +302,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cmdClientes.setText("Ver Clientes");
+        cmdClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -663,7 +668,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdModificarPedidoActionPerformed
 
     private void cmdEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarProductoActionPerformed
-        String codigo = txtCodProducto.getText();;
+        String codigo = txtCodProducto.getText();
         
         con = new Conexion();   
         con.query("DELETE FROM productos WHERE codigo = '" + codigo + "'");
@@ -726,6 +731,12 @@ public class Principal extends javax.swing.JFrame {
         
         llenarListaPedidos(SQL);
     }//GEN-LAST:event_txtBuscarPedidoKeyReleased
+
+    private void cmdClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClientesActionPerformed
+        setVisible(false);
+        Clientes form = new Clientes();
+        form.setVisible(true);
+    }//GEN-LAST:event_cmdClientesActionPerformed
 
     /**
      * @param args the command line arguments
