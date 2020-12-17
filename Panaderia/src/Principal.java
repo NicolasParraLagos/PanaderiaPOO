@@ -1,4 +1,5 @@
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import java.sql.ResultSet;
 
 
@@ -41,12 +42,12 @@ public class Principal extends javax.swing.JFrame {
                 while(precio.length()<13){
                     precio = precio + " ";
                 }
-                stock = "%" + lista.getString("stock");
-                while(stock.length()<7){
+                stock = "¡" + lista.getString("stock");
+                while(stock.length()<13){
                     stock = stock + " ";
                 }
                 stockCritico = "!" + lista.getString("stockCritico");
-                while(stockCritico.length()<7){
+                while(stockCritico.length()<11){
                     stockCritico = stockCritico + " ";
                 }
                 
@@ -73,7 +74,7 @@ public class Principal extends javax.swing.JFrame {
             lstPedido.setModel(mod);
             while(lista.next()){
                 numero = lista.getString("numero");
-                while(numero.length()<11){
+                while(numero.length()<12){
                     numero = numero + " ";
                 }
                 rutCliente = "#" + lista.getString("rutCliente");
@@ -161,6 +162,8 @@ public class Principal extends javax.swing.JFrame {
         lblEstado = new javax.swing.JLabel();
         cmdSalir = new javax.swing.JButton();
         cmdClientes = new javax.swing.JButton();
+        lblListaProducto = new javax.swing.JLabel();
+        lblListaPedido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +177,38 @@ public class Principal extends javax.swing.JFrame {
         lblPrecio.setText("Precio");
 
         lblStock.setText("Stock");
+
+        txtCodProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodProductoKeyTyped(evt);
+            }
+        });
+
+        txtNomProducto.setMaximumSize(new java.awt.Dimension(6, 22));
+        txtNomProducto.setName(""); // NOI18N
+        txtNomProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomProductoKeyTyped(evt);
+            }
+        });
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
+
+        txtStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockKeyTyped(evt);
+            }
+        });
+
+        txtStockCritico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockCriticoKeyTyped(evt);
+            }
+        });
 
         lstProducto.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         lstProducto.setToolTipText("");
@@ -235,6 +270,18 @@ public class Principal extends javax.swing.JFrame {
 
         lblNum.setText("Numero Pedido");
 
+        txtNum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumKeyTyped(evt);
+            }
+        });
+
+        txtRutCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRutClienteKeyTyped(evt);
+            }
+        });
+
         lblRutCliente.setText("Rut Cliente");
 
         lblDescripcion.setText("Descipción");
@@ -281,6 +328,12 @@ public class Principal extends javax.swing.JFrame {
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
+        txtDescripcion.setToolTipText("");
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtDescripcion);
 
         bgEstado.add(rbPendiente);
@@ -308,6 +361,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        lblListaProducto.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        lblListaProducto.setText(" CODIGO   NOMBRE                                              TIPO                  PRECIO       STOCK        CRITICO");
+
+        lblListaPedido.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        lblListaPedido.setText(" NUMERO      RUT             ESTADO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -325,10 +384,12 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(lblRutCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(12, 12, 12)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtRutCliente, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                                        .addComponent(txtNum)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtRutCliente)
+                                        .addComponent(txtNum)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE))))
                                 .addComponent(lblPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -348,18 +409,17 @@ public class Principal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(rbCancelado))
                                     .addComponent(cmdEliminarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmdSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cmbBuscarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                            .addComponent(lblListaPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -381,7 +441,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNomProducto)
+                                    .addComponent(txtNomProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtPrecio)
                                     .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtStock)
@@ -390,50 +450,51 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 161, Short.MAX_VALUE)
+                                .addGap(0, 246, Short.MAX_VALUE)
                                 .addComponent(lblBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cmbBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jScrollPane1)
+                            .addComponent(lblListaProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProducto)
+                    .addComponent(lblListaProducto))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProducto)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblCodProducto)
-                                    .addComponent(txtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblNomProducto)
-                                    .addComponent(txtNomProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblTipo)
-                                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblPrecio)
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblStock)
-                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCodProducto)
+                            .addComponent(txtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNomProducto)
+                            .addComponent(txtNomProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipo)
+                            .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrecio)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStock)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblStockCritico)
                             .addComponent(txtStockCritico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -441,18 +502,15 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(cmdNuevoProducto)
                     .addComponent(cmdModificarProducto)
                     .addComponent(cmdEliminarProducto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblNum)
-                                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblPedido))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNum)
+                            .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRutCliente)
@@ -467,7 +525,12 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(rbListo)
                             .addComponent(rbCancelado)
                             .addComponent(lblEstado)))
-                    .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPedido)
+                            .addComponent(lblListaPedido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdModificarPedido)
@@ -504,8 +567,8 @@ public class Principal extends javax.swing.JFrame {
         info = String.valueOf(lstProducto.getSelectedValue());
         txtCodProducto.setText(info.substring(0,info.indexOf("#")).trim());
         txtNomProducto.setText(info.substring(info.indexOf("#") + 1,info.indexOf("/")).trim());
-        txtPrecio.setText(info.substring(info.indexOf("$") + 1,info.indexOf("%")).trim());
-        txtStock.setText(info.substring(info.indexOf("%") + 1,info.indexOf("!")).trim());
+        txtPrecio.setText(info.substring(info.indexOf("$") + 1,info.indexOf("¡")).trim());
+        txtStock.setText(info.substring(info.indexOf("¡") + 1,info.indexOf("!")).trim());
         txtStockCritico.setText(info.substring(info.indexOf("!") + 1,info.length()));
         
         c = 0;
@@ -558,21 +621,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoProductoActionPerformed
         if((cmdNuevoProducto.getText()).equals("Insertar")){
-            String cod = txtCodProducto.getText();
-            String nom = txtNomProducto.getText();
-            String tipo = String.valueOf(cmbTipo.getSelectedItem());
-            int precio = Integer.parseInt(txtPrecio.getText());
-            int stock = Integer.parseInt(txtStock.getText());
-            int stockCritico = Integer.parseInt(txtStockCritico.getText());
+            try{
+                String cod = txtCodProducto.getText().trim();
+                String nom = txtNomProducto.getText().trim();
+                String tipo = String.valueOf(cmbTipo.getSelectedItem());
+                int precio = Integer.parseInt(txtPrecio.getText().trim());
+                int stock = Integer.parseInt(txtStock.getText().trim());
+                int stockCritico = Integer.parseInt(txtStockCritico.getText().trim());
 
-            con = new Conexion();
+                con = new Conexion();
 
-            String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
+                String SQL = "INSERT INTO productos (codigo,nombre,tipo,precio,stock,stockCritico) VALUES ('"+cod+"','"+nom+"','"+tipo+"',"+precio+","+stock+","+stockCritico+")";
 
-            con.query(SQL);
-            con.close();
+                con.query(SQL);
+                con.close();
 
-            llenarListaProducto("SELECT * FROM productos");
+                llenarListaProducto("SELECT * FROM productos");
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"No se pudo insertar en la base de datos", "ERROR",3);
+            }
         }else{
             txtCodProducto.setEnabled(true);
             cmdModificarProducto.setEnabled(false);
@@ -586,28 +653,32 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdNuevoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoPedidoActionPerformed
         if((cmdNuevoPedido.getText()).equals("Insertar")){
-            String num = txtNum.getText();
-            String rut = txtRutCliente.getText();
-            String des = txtDescripcion.getText();
-            String est;
-            if(rbPendiente.isSelected()){
-                est="Pendiente";
-            }else{
-                if(rbListo.isSelected()){
-                    est="Listo";
+            try{
+                int num = Integer.parseInt(txtNum.getText().trim());
+                String rut = txtRutCliente.getText().trim();
+                String des = txtDescripcion.getText().trim();
+                String est;
+                if(rbPendiente.isSelected()){
+                    est="Pendiente";
                 }else{
-                    est="Cancelado";
+                    if(rbListo.isSelected()){
+                        est="Listo";
+                    }else{
+                        est="Cancelado";
+                    }
                 }
+
+                con = new Conexion();
+
+                String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
+
+                con.query(SQL);
+                con.close();
+
+                llenarListaPedidos("SELECT * FROM pedidos");
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"No se pudo insertar en la base de datos", "ERROR",3);
             }
-
-            con = new Conexion();
-
-            String SQL = "INSERT INTO pedidos (numero,rutCliente,descripcion,estado) VALUES ("+num+",'"+rut+"','"+des+"','"+est+"')";
-
-            con.query(SQL);
-            con.close();
-            
-            llenarListaPedidos("SELECT * FROM pedidos");
         }else{
             txtNum.setEnabled(true);
             cmdModificarPedido.setEnabled(false);
@@ -620,73 +691,104 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdNuevoPedidoActionPerformed
 
     private void cmdModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarProductoActionPerformed
-        String codigo, nombre, tipo, precio, stock, stockCritico;
-        codigo = txtCodProducto.getText();
-        nombre = txtNomProducto.getText();
-        tipo = String.valueOf(cmbTipo.getSelectedItem());
-        precio = txtPrecio.getText();
-        stock = txtStock.getText();
-        stockCritico = txtStockCritico.getText();
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro que quiere modificar este producto?", "Confirmar",JOptionPane.YES_NO_OPTION);
         
-        con = new Conexion();
-               
-        String SQL = "UPDATE productos SET nombre = '" + nombre + "', tipo = '" + tipo + "', precio = " + precio + ", stock = " + stock + ", stockCritico = " + stockCritico + " WHERE codigo = '" + codigo + "'";
-        
-        con.query(SQL);
-        con.close();
-        
-        llenarListaProducto("SELECT * FROM productos");  
-        vaciarProducto();
+        if(opcion == JOptionPane.YES_OPTION){
+            try{
+                String codigo, nombre, tipo;
+                int precio, stock, stockCritico;
+
+                codigo = txtCodProducto.getText().trim();
+                nombre = txtNomProducto.getText().trim();
+                tipo = String.valueOf(cmbTipo.getSelectedItem());
+                precio = Integer.parseInt(txtPrecio.getText().trim());
+                stock = Integer.parseInt(txtStock.getText().trim());
+                stockCritico = Integer.parseInt(txtStockCritico.getText().trim());
+
+                con = new Conexion();
+
+                String SQL = "UPDATE productos SET nombre = '" + nombre + "', tipo = '" + tipo + "', precio = " + precio + ", stock = " + stock + ", stockCritico = " + stockCritico + " WHERE codigo = '" + codigo + "'";
+
+                con.query(SQL);
+                con.close();
+
+                llenarListaProducto("SELECT * FROM productos");  
+                vaciarProducto();
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"No se pudo modificar este producto", "ERROR",3);
+            }
+        }
     }//GEN-LAST:event_cmdModificarProductoActionPerformed
 
     private void cmdModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarPedidoActionPerformed
-        String num, rut, des, est;
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro que quiere modificar este pedido?", "Confirmar",JOptionPane.YES_NO_OPTION);
         
-        num = txtNum.getText();
-        rut = txtRutCliente.getText();
-        des = txtDescripcion.getText();
-        
-        if(rbPendiente.isSelected()){
-            est="Pendiente";
-        }else{
-            if(rbListo.isSelected()){
-                est="Listo";
-            }else{
-                est="Cancelado";
+        if(opcion == JOptionPane.YES_OPTION){
+            try{
+                String rut, des, est;
+                int num;
+                
+                num = Integer.parseInt(txtNum.getText().trim());
+                rut = txtRutCliente.getText().trim();
+                des = txtDescripcion.getText().trim();
+
+                if(rbPendiente.isSelected()){
+                    est="Pendiente";
+                }else{
+                    if(rbListo.isSelected()){
+                        est="Listo";
+                    }else{
+                        est="Cancelado";
+                    }
+                }
+
+                con = new Conexion();
+
+                String SQL = "UPDATE pedidos SET rutCliente = '" + rut + "', descripcion = '" + des + "', estado = '" + est + "' WHERE numero = " + num;
+
+                con.query(SQL);
+                con.close();
+
+                llenarListaPedidos("SELECT * FROM pedidos");
+                vaciarPedido();
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"No se pudo modificar este pedido", "ERROR",3);
             }
         }
-        
-        con = new Conexion();
-        
-        String SQL = "UPDATE pedidos SET rutCliente = '" + rut + "', descripcion = '" + des + "', estado = '" + est + "' WHERE numero = " + num;
-        
-        con.query(SQL);
-        con.close();
-        
-        llenarListaPedidos("SELECT * FROM pedidos");
-        vaciarPedido();
     }//GEN-LAST:event_cmdModificarPedidoActionPerformed
 
     private void cmdEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarProductoActionPerformed
-        String codigo = txtCodProducto.getText();
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro que quiere eliminar este producto?", "Confirmar",JOptionPane.YES_NO_OPTION);
         
-        con = new Conexion();   
-        con.query("DELETE FROM productos WHERE codigo = '" + codigo + "'");
-        con.close();
+        if(opcion == JOptionPane.YES_OPTION){
         
-        llenarListaProducto("SELECT * FROM productos");
-        vaciarProducto();
+            String codigo = txtCodProducto.getText();
+
+            con = new Conexion();   
+            con.query("DELETE FROM productos WHERE codigo = '" + codigo + "'");
+            con.close();
+
+            llenarListaProducto("SELECT * FROM productos");
+            vaciarProducto();
+        
+        }
     }//GEN-LAST:event_cmdEliminarProductoActionPerformed
 
     private void cmdEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarPedidoActionPerformed
-        String num = txtNum.getText();
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro que quiere eliminar este pedido?", "Confirmar",JOptionPane.YES_NO_OPTION);
         
-        con = new Conexion();
-        con.query("DELETE FROM pedidos WHERE numero = " + num);
-        con.close();
+        if(opcion == JOptionPane.YES_OPTION){
         
-        llenarListaPedidos("SELECT * FROM pedidos");
-        vaciarPedido();
+            String num = txtNum.getText();
+
+            con = new Conexion();
+            con.query("DELETE FROM pedidos WHERE numero = " + num);
+            con.close();
+
+            llenarListaPedidos("SELECT * FROM pedidos");
+            vaciarPedido();
+            
+        }
     }//GEN-LAST:event_cmdEliminarPedidoActionPerformed
 
     private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
@@ -737,6 +839,77 @@ public class Principal extends javax.swing.JFrame {
         Clientes form = new Clientes();
         form.setVisible(true);
     }//GEN-LAST:event_cmdClientesActionPerformed
+
+    private void txtCodProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProductoKeyTyped
+        String cod = txtCodProducto.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc == '#' || kc == '/' || kc == '$' || kc == '¡' || kc == '!' || cod.length()>7){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodProductoKeyTyped
+
+    private void txtNomProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProductoKeyTyped
+        String nom = txtNomProducto.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc == '#' || kc == '/' || kc == '$' || kc == '¡' || kc == '!' || nom.length()>49){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomProductoKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        String pre = txtPrecio.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc != '1' && kc != '2' && kc != '3' && kc != '4' && kc != '5' && kc != '6' && kc != '7' && kc != '7' && kc != '8' && kc != '9' && kc != '0' || pre.length()>9){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyTyped
+        String stk = txtStock.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc != '1' && kc != '2' && kc != '3' && kc != '4' && kc != '5' && kc != '6' && kc != '7' && kc != '7' && kc != '8' && kc != '9' && kc != '0' || stk.length()>9){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockKeyTyped
+
+    private void txtStockCriticoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockCriticoKeyTyped
+        String stk = txtStockCritico.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc != '1' && kc != '2' && kc != '3' && kc != '4' && kc != '5' && kc != '6' && kc != '7' && kc != '7' && kc != '8' && kc != '9' && kc != '0' || stk.length()>9){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockCriticoKeyTyped
+
+    private void txtNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumKeyTyped
+        String num = txtNum.getText();      
+        char kc = evt.getKeyChar();
+
+        if(kc != '1' && kc != '2' && kc != '3' && kc != '4' && kc != '5' && kc != '6' && kc != '7' && kc != '7' && kc != '8' && kc != '9' && kc != '0' || num.length()>9){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumKeyTyped
+
+    private void txtRutClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutClienteKeyTyped
+        String rut = txtRutCliente.getText();
+        char kc = evt.getKeyChar();
+
+        if(rut.length()>14 || kc == '#' || kc == '!'){       
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRutClienteKeyTyped
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+        String des = txtDescripcion.getText();      
+        if(des.length()>99){       
+            evt.consume();
+        }
+        System.out.println(des.length());
+    }//GEN-LAST:event_txtDescripcionKeyTyped
 
     /**
      * @param args the command line arguments
@@ -795,6 +968,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodProducto;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblListaPedido;
+    private javax.swing.JLabel lblListaProducto;
     private javax.swing.JLabel lblNomProducto;
     private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblPedido;
