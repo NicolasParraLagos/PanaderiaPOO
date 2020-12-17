@@ -41,6 +41,7 @@ public class Conexion {
     public ResultSet listar(String SQL){
         try{
             ResultSet lista = st.executeQuery(SQL);
+            
             msg="operacion realizada correctamente";
             return lista;
         }catch(Exception ex){
@@ -48,7 +49,7 @@ public class Conexion {
             return null;
         }
     }
-        
+            
     public boolean close(){
         try{
             con.close();
