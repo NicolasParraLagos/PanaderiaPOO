@@ -127,7 +127,15 @@ public class Clientes extends javax.swing.JFrame {
             new String [] {
                 "Rut", "Nombre", "Apellido", "Fono", "Dirección"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtClientes.getTableHeader().setReorderingAllowed(false);
         jtClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,9 +144,12 @@ public class Clientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtClientes);
         if (jtClientes.getColumnModel().getColumnCount() > 0) {
-            jtClientes.getColumnModel().getColumn(0).setMinWidth(110);
-            jtClientes.getColumnModel().getColumn(0).setPreferredWidth(110);
-            jtClientes.getColumnModel().getColumn(0).setMaxWidth(110);
+            jtClientes.getColumnModel().getColumn(0).setMinWidth(100);
+            jtClientes.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jtClientes.getColumnModel().getColumn(0).setMaxWidth(100);
+            jtClientes.getColumnModel().getColumn(3).setMinWidth(130);
+            jtClientes.getColumnModel().getColumn(3).setPreferredWidth(130);
+            jtClientes.getColumnModel().getColumn(3).setMaxWidth(130);
             jtClientes.getColumnModel().getColumn(4).setPreferredWidth(300);
         }
 
@@ -289,12 +300,12 @@ public class Clientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

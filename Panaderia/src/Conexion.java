@@ -40,8 +40,7 @@ public class Conexion {
     
     public ResultSet listar(String SQL){
         try{
-            ResultSet lista = st.executeQuery(SQL);
-            
+            ResultSet lista = st.executeQuery(SQL);       
             msg="operacion realizada correctamente";
             return lista;
         }catch(Exception ex){
